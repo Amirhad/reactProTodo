@@ -4,7 +4,8 @@ import { loadTodos } from "./action";
 import "./app.css";
 
 function App() {
-  const todos = useSelector((state) => state);
+  const todos = useSelector((state) => state.todos);
+  const loading = useSelector((state) => state.loading)
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -12,14 +13,19 @@ function App() {
   }, []);
 
   return (
-    <>
-      {todos.map((item) => {
-        return (
-          <>
-            <li className="text">{item.title}</li>;
-          </>
-        );
-      })}
+    <>     
+
+      {
+        loading ? 'идет загрузка...' : (
+          todos.map((item) => {
+            return (
+              <>
+                <li className="text">{item.title}</li>;
+              </>
+            );
+          })
+        )
+      }
     </>
   );
 }

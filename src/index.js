@@ -6,12 +6,29 @@ import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 
 
-const initialState = []
+const initialState = {
+  todos:[],
+  loading:false
+}
 
 const reducer = (state = initialState,actions) =>{
     switch (actions.type) {
+
+
+      case "load/todos/start":
+        return{
+          ...state,
+          loading: true
+        }
+
+
+
       case "load/start/fulfilled":
-        return actions.payload
+        return {
+          ...state,
+          todos: actions.payload,
+          loading:false
+        }
         
     
       default:
