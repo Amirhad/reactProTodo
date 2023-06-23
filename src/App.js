@@ -1,24 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { useEffect, useState } from "react";
+import './app.css'
 function App() {
+  const [data, setData] = useState([]);
+  const url = "https://jsonplaceholder.typicode.com/todos";
+
+  useEffect(() => {
+    fetch(url)
+      .then((response) => {
+        if (!response.ok) {
+          throw Error("не удалось сделать запрос на сервер");
+        }
+        return response.json();
+      })
+      .then((nug) => {
+        setData(nug);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {data.map((item) => {
+        let classTodo;
+        if (item.completed === true) {
+          classTodo = "noText";
+        } else {
+          classTodo = "text";
+        }
+        return (
+          <div className="center">
+            <ul>
+              <li className={classTodo} >{item.title}</li>
+            </ul>
+          </div>
+        );
+      })}
+    </>
   );
 }
 
