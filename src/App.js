@@ -1,28 +1,53 @@
-import { useEffect, useState } from "react";
-import './app.css'
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { loadTodos } from "./action";
+import "./app.css";
+
 function App() {
-  const [data, setData] = useState([]);
-  const url = "https://jsonplaceholder.typicode.com/todos";
+  const todos = useSelector((state) => state);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    fetch(url)
-      .then((response) => {
-        if (!response.ok) {
-          throw Error("не удалось сделать запрос на сервер");
-        }
-        return response.json();
-      })
-      .then((nug) => {
-        setData(nug);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+    dispatch(loadTodos());
   }, []);
 
   return (
     <>
-      {data.map((item) => {
+      {todos.map((item) => {
+        return (
+          <>
+            <li className="text">{item.title}</li>;
+          </>
+        );
+      })}
+    </>
+  );
+}
+
+export default App;
+
+//  ----------  первая задача ----------
+
+// const [data, setData] = useState([]);
+// const url = "https://jsonplaceholder.typicode.com/todos";
+
+// useEffect(() => {
+//   fetch(url)
+//     .then((response) => {
+//       if (!response.ok) {
+//         throw Error("не удалось сделать запрос на сервер");
+//       }
+//       return response.json();
+//     })
+//     .then((nug) => {
+//       setData(nug);
+//     })
+//     .catch((e) => {
+//       console.log(e);
+//     });
+// }, []);
+
+/* {data.map((item) => {
         let classTodo;
         if (item.completed === true) {
           classTodo = "noText";
@@ -36,9 +61,4 @@ function App() {
             </ul>
           </div>
         );
-      })}
-    </>
-  );
-}
-
-export default App;
+      })} */
