@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loadTodos } from "./action";
-import "./app.css";
 
 function App() {
   const todos = useSelector((state) => state.todos);
