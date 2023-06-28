@@ -1,16 +1,33 @@
-
-li{
-    text-align: center;
-    width: 500px;
-    height: auto;
-    background-color: rgb(219, 214, 139);
-    padding: 10px;
-    font-size: 20px;
-    list-style: none;
-    font-style:oblique;
+.container{
+    width: 600px;
     margin: auto;
-    margin-top: 10px;
 }
-/* .noText{
-    text-decoration: line-through;
-} */
+
+.header-text{
+    text-align: center;
+    border-bottom: 1px solid #000;
+}
+
+
+.todo_wrapper{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    margin-bottom: 30px;
+    border: 1px solid #000;
+    align-items: center;
+}
+.todo{
+    flex:1;
+    margin-left: 20px;
+    padding: 8px;
+}
+
+.button > button{
+ border: none;
+ background-color: darkorange;
+ border-radius: 8px;
+ text-align: center;
+ padding: 10px;
+ color: white;
+}

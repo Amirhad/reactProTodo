@@ -1,31 +1,42 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loadTodos } from "./action";
+import { loadTodos, removeTodo } from "./action";
+import Header from "./Header";
 
 function App() {
   const todos = useSelector((state) => state.todos);
-  const loading = useSelector((state) => state.loading)
+  const loading = useSelector((state) => state.loading);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(loadTodos());
+    dispatch(loadTodos())
   }, []);
 
-  return (
-    <>     
 
-      {
-        loading ? 'идет загрузка...' : (
-          todos.map((item) => {
+  const handleDelete = (id) =>{
+    dispatch(removeTodo(id));
+
+  }  
+
+  return (
+    <div className="container">
+      <Header />
+      {loading
+        ? "идет загрузка..."
+        : todos.map((item) => {
             return (
-              <>
-                <li className="text">{item.title}</li>;
-              </>
+              <div className="todo_wrapper">
+                <div className="checkbox">
+                  <input type="checkbox" />
+                </div>
+                <div className="todo">{item.title}</div>
+                <div className="button">
+                  <button onClick={() =>handleDelete(item.id)}>удалить</button>
+                </div>
+              </div>
             );
-          })
-        )
-      }
-    </>
+          })}
+    </div>
   );
 }
 

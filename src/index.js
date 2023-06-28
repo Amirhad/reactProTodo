@@ -31,6 +31,13 @@ const reducer = (state = initialState,actions) =>{
           todos: actions.payload,
           loading:false
         }
+
+
+        case "delete/todo/fulfilled":
+          return{
+            ...state,
+            todos:state.todos.filter((todo) => todo.id !== actions.payload)
+          }
         
     
       default:
