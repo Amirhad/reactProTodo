@@ -33,12 +33,57 @@ const reducer = (state = initialState,actions) =>{
         }
 
 
+      case "delete/todo/start":
+        return{
+          ...state,
+          todos: state.todos.map(todo =>{
+            if (todo.id === actions.payload) {
+              return{
+                ...todo,
+                deleting:true
+              }
+            }
+            return todo
+          })
+        }
+
+
         case "delete/todo/fulfilled":
           return{
             ...state,
             todos:state.todos.filter((todo) => todo.id !== actions.payload)
           }
         
+
+
+        case "check/load/start":
+          return{
+            ...state,
+            todos: state.todos.map(todo =>{
+              if (todo.id === actions.payload) {
+                return{
+                  ...todo,
+                  checking:true
+                }
+              }
+              return todo
+            })
+          }
+
+        case "check/load/success":
+          return{
+            ...state,
+            todos:state.todos.map((todo) =>{
+              if (todo.id === actions.payload) {
+                return{
+                  ...todo,
+                  completed:!todo.completed,
+                  checking:false
+                }
+              }
+              return todo
+            })
+          }
     
       default:
         return state;

@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loadTodos, removeTodo } from "./action";
+import { loadTodos, removeTodo, updateCheck } from "./action";
 import Header from "./Header";
+import ReactLoading from "react-loading";
 
 function App() {
   const todos = useSelector((state) => state.todos);
@@ -9,29 +10,54 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(loadTodos())
+    dispatch(loadTodos());
   }, []);
 
-
-  const handleDelete = (id) =>{
+  const handleDelete = (id) => {
     dispatch(removeTodo(id));
+  };
 
-  }  
+  const handleChecled = (id, completed) => {
+    dispatch(updateCheck(id, completed));
+  };
 
   return (
     <div className="container">
-      <Header />
+      <Header todos={todos} />
       {loading
-        ? "идет загрузка..."
+        ? <ReactLoading
+        color="blue"
+        type="spin"
+        width={30}
+        height={30}
+      />
         : todos.map((item) => {
             return (
               <div className="todo_wrapper">
                 <div className="checkbox">
-                  <input type="checkbox" />
+                  {item.checking ? (
+                    <ReactLoading
+                      color="blue"
+                      type="spin"
+                      width={20}
+                      height={20}
+                    />
+                  ) : (
+                    <input
+                      type="checkbox"
+                      checked={item.completed}
+                      onChange={() => handleChecled(item.id, item.completed)}
+                    />
+                  )}
                 </div>
                 <div className="todo">{item.title}</div>
                 <div className="button">
-                  <button onClick={() =>handleDelete(item.id)}>удалить</button>
+                  <button
+                    onClick={() => handleDelete(item.id)}
+                    disabled={item.deleting}
+                  >
+                    удалить
+                  </button>
                 </div>
               </div>
             );
