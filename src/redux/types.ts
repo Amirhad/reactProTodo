@@ -1,9 +1,10 @@
 export interface initialStateTypes {
-  todos: Array<[
+  todos: Array<{
     userId: number,
     id: number,
-    title: string
-  ]>;
+    title: string,
+    completed: boolean
+  }>;
   loading: boolean;
 }
 

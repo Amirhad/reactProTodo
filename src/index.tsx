@@ -1,8 +1,8 @@
 import ReactDOM from "react-dom/client";
 import {App} from "./components/App";
 import { Provider } from "react-redux";
-import "./index.css";
-import { store } from "./redux/reducer";
+import "./styles/index.scss";
+import { store } from "./redux";
 
 
 
@@ -12,3 +12,4 @@ root.render(
     <App />
   </Provider>
 );
+

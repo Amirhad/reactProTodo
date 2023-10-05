@@ -16,7 +16,6 @@ interface Todo {
 export const App: React.FC = () => {
   const todos = useTypedSelector((state) => state.reducer.todos);
   const loading = useTypedSelector((state) => state.reducer.loading);
-console.log(todos);
 
   const { loadTodos, removeTodo, updateCheck } = useActions();
 

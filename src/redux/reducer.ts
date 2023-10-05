@@ -3,12 +3,7 @@ import thunk from "redux-thunk";
 import { initialStateTypes, todoActions, TodoActionTypes } from "./types";
 
 const initialState: initialStateTypes = {
-  todos: Array<[
-    userId: number,
-    id: number,
-    title: string,
-    completed: boolean
-  ]>,
+  todos: [],
   loading: false,
 };
 
@@ -80,5 +75,4 @@ export const reducer = (state = initialState, actions: todoActions) => {
       return state;
   }
 };
-
 export const store = createStore(reducer, applyMiddleware(thunk));
