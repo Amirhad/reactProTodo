@@ -3,6 +3,7 @@ import { Header } from "./Header";
 import ReactLoading from "react-loading";
 import { useActions } from "../hooks/hook";
 import { useTypedSelector } from "../hooks";
+import styles from '../styles/todo.module.scss'
 
 interface Todo {
   userId: number;
@@ -32,15 +33,15 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="container">
+    <div className={styles.container}>
       <Header todos={todos} />
       {loading ? (
         <ReactLoading color="blue" type="spin" width={30} height={30} />
       ) : (
         todos.map((item: Todo) => {
           return (
-            <div className="todo_wrapper">
-              <div className="checkbox">
+            <div className={styles.todo_wrapper}>
+              <div className={styles.checkbox}>
                 {item.checking ? (
                   <ReactLoading
                     color="blue"
@@ -56,8 +57,8 @@ export const App: React.FC = () => {
                   />
                 )}
               </div>
-              <div className="todo">{item.title}</div>
-              <div className="button">
+              <div className={styles.todo}>{item.title}</div>
+              <div className={styles.button}>
                 <button
                   onClick={() => handleDelete(item.id)}
                   disabled={item.deleting}

@@ -1,3 +1,6 @@
+import styles from '../styles/header.module.scss'
+
+
 interface todosProps {
  todos:Array<{
   userId: number;
@@ -13,7 +16,7 @@ interface todosProps {
 export const Header = ({ todos }:todosProps) => {
   return (
     <>
-      <h1 className="header-text">Список дел:{todos.length}</h1>
+      <h1 className={styles.header_text}>Список дел:{todos.length}</h1>
     </>
   );
 };
